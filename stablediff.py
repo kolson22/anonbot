@@ -12,7 +12,7 @@ class Stable:
     self.url = url
 
   def create_image(self, prompt):
-    self.prompt['prompt'] = prompt
+    self.payload['prompt'] = prompt
     response = requests.post(url=f'{self.url}/sdapi/v1/txt2img', json=self.payload)
     r = response.json()
     return r['images']
