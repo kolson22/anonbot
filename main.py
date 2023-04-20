@@ -5,6 +5,7 @@ from stablediff import Stable
 TOKEN = os.getenv("TOKEN")
 URL = os.getenv("URL")
 STEPS = os.getenv("STEPS")
+SAMPLER_INDEX = os.getenv("SAMPLER_INDEX")
 
 client = discord.Client(intents=discord.Intents().all())
 
@@ -16,7 +17,7 @@ async def on_ready():
 async def on_message(message):
   if "Direct Message" in str(message.channel):
     channel = client.get_channel(382984951731060767)
-    stable = Stable(URL, steps=STEPS)
+    stable = Stable(URL, steps=STEPS, sampler_index=SAMPLER_INDEX)
     images = stable.create_image(message.content)
     # files = [discord.File(io.BytesIO(base64.b64decode(image))) for image in images]
     file = discord.File(io.BytesIO(base64.b64decode(images[0])), filename="image0.png")
