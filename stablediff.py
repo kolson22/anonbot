@@ -5,11 +5,11 @@ from PIL import Image, PngImagePlugin
 
 class Stable:
   url = ""
-  payload = {
-     "steps": 5
-  }
-  def __init__(self, url):
+  payload = {}
+  def __init__(self, url, steps=15, sampler_index="Euler a"):
     self.url = url
+    self.payload['steps'] = steps
+    self.payload['sampler_index'] = sampler_index
 
   def create_image(self, prompt):
     self.payload['prompt'] = prompt
