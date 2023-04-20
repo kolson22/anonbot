@@ -19,7 +19,8 @@ async def on_message(message):
     images = stable.create_image(message.content)
     # files = [discord.File(io.BytesIO(base64.b64decode(image))) for image in images]
     file = discord.File(io.BytesIO(base64.b64decode(images[0])), filename="image0.png")
-    embed = discord.Embed(set_image="attachment://image0.png")
+    embed = discord.Embed()
+    embed.set_image(url="attachment://image0.png")
     await channel.send(file=file, embed=embed)
 
 client.run(TOKEN)
