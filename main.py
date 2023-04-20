@@ -1,7 +1,9 @@
 import discord
-import os
+import io, base64, os
+from stablediff import Stable
 
 TOKEN = os.getenv("TOKEN")
+URL = os.getenv("URL")
 
 client = discord.Client(intents=discord.Intents().all())
 
@@ -13,6 +15,9 @@ async def on_ready():
 async def on_message(message):
   if "Direct Message" in str(message.channel):
     channel = client.get_channel(382984951731060767)
-    await channel.send(message.content)
+    stable = Stable(URL)
+    images = stable.create_image(message.content)
+    files = [discord.File(io.BytesIO(base64.b64decode(image))) for image in images]
+    await channel.send(files=files)
 
 client.run(TOKEN)
