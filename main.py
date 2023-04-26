@@ -16,7 +16,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
   if "Direct Message" in str(message.channel):
-    channel = client.get_channel(382984951731060767)
+    channel = client.get_channel(1100863097385799700)
     stable = Stable(URL, steps=STEPS, sampler_index=SAMPLER_INDEX)
     images = stable.create_image(message.content)
     # files = [discord.File(io.BytesIO(base64.b64decode(image))) for image in images]
